@@ -6,3 +6,4 @@ fastapi-sqlalchemy
 python-dotenv
 flask
 python-multipart
+tensorflow
