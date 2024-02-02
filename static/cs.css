@@ -98,21 +98,9 @@ body {
 	opacity: 1;
 }
 .select-image {
-	display: block;
-	width: 100%;
-	padding: 16px 0;
-	border-radius: 15px;
-	background: var(--blue);
-	color: #fff;
-	font-weight: 500;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-	transition: all .3s ease;
+	
 }
-.select-image:hover {
-	background: var(--dark-blue);
-}
+
 #navitem1 {
     color: #323f4b;
     font-width:bold;
