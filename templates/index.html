@@ -22,10 +22,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-link active" id="navitem1" href="#sectionwcu"><b>Why Choose Us?</b><span class="sr-only">(current)</span></a>
-                    <a class="nav-link" id="navitem2" href="#ems"><b>Explore Menu</b></a>
-                    <a class="nav-link" id="navitem3" href="#dp"><b>Delivery & Payments</b></a>
-                    <a class="nav-link" id="navitem4" href="#fu"><b>Follow Us</b></a>
+                    <a class="nav-link active" id="navitem1" href="#sectionwcu"><b>Home </b><span class="sr-only">(current)</span><i class="fa fa-home" style="font-size:18px"></i> </a>&nbsp;
+                    <a class="nav-link" id="navitem2" href="#ems"><b>WHO WE ARE </b><i class="fa fa-search" style="font-size:18px"></i></a>&nbsp;&nbsp;
+                    <a class="nav-link" id="navitem3" href="#dp"><b>WHAT WE DO </b><i class='fas fa-clipboard-list' style='font-size:18px'></i></a>&nbsp;&nbsp;
+                    <a class="nav-link" id="navitem4" href="#fu"><b>Follow Us </b><i class="fa fa-telegram" style="font-size:18px"></i></a>&nbsp;&nbsp;
                 </div>
             </div>
 
@@ -49,12 +49,12 @@
                 <p>Image size must be less than <span>2MB</span></p>
             </div>
             <input class="select-image" type="file" name="image_file" accept="image/*" required>
-
-            <button type="submit">Upload Image</button>
+            
+            <button class="custom-button mb-3" type="submit">Upload Image</button>
         </form>
         
 	</div>
-    <div class="container col-4 col-md-4 mt-4 border rounded shadow p-8" style="height: 40vh;">
+    <div class="container col-4 col-md-4 mt-4  shadow p-8" style="height: 40vh; border-radius: 35px;">
     <h2 class="text-center mb-4">Result</h2>
     {% if predictions is defined %}
         <p>Predictions: {{ predictions }}</p>

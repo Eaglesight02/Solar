@@ -17,6 +17,7 @@
 }
 
 
+
 body {
       margin: 0;
     padding: 0;
@@ -123,3 +124,12 @@ body {
     font-family: Roboto;
 }
 
+.custom-button {
+    color: white;
+    background-color: #5ca1f0;
+    width: 130px;
+    height: 45px;
+    border-width: 0;
+    border-radius: 8px;
+    margin-right: 10px;
+}
