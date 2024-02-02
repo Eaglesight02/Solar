@@ -43,22 +43,32 @@ async def upload_image(
       
 def process_image(file_path):
 
-    tf.keras.models.load_model('my_model.pkl')
-    
+    with open('model.pkl', 'rb') as file:
+        model = pickle.load(file)
 
-    input_image = file_path
 
+    input_image_path = file_path
+    input_image = cv2.imread(input_image_path)
+
+    # Preprocess the input image (resize, scale pixel values, etc.)
+    # Example:
     input_image_resized = cv2.resize(input_image, (101, 101))  # Resize to match the model input size
     input_image_rescaled = input_image_resized / 255.0  # Scale pixel values between 0 and 1
 
+    # Reshape the input image to match the model's input shape
     input_image_reshaped = np.expand_dims(input_image_rescaled, axis=0)  # Add batch dimension
 
+    # Use the trained model to predict
     predictions = model.predict(input_image_reshaped).reshape((-1, ))
 
+    # If you're using binary classification, you might need to threshold the predictions
+    # For example, if predictions > 0.5, label as class 1, otherwise label as class 0
+    # Example:
     binary_predictions = (predictions > 0.5).astype(int)
 
     # Print or use the predictions as needed
     print("Predictions:", binary_predictions)
+
 
 
 
