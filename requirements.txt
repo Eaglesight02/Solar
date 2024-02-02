@@ -5,3 +5,4 @@ Jinja2==3.0.3
 fastapi-sqlalchemy
 python-dotenv
 flask
+python-multipart
