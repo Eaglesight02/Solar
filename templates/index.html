@@ -55,7 +55,9 @@
         
 	</div>
     <div class="container col-4 col-md-4 mt-4  shadow p-8" style="height: 40vh; border-radius: 35px;">
-    <h2 class="text-center mb-4">Result</h2>
+        <div class="result-heading-bg" style="color:white; background-color: #5ca1f0; border-radius: 20px; ">
+            <h2 class="text-center mb-4">Result</h2>
+        </div>
     {% if predictions is defined %}
         <p>Predictions: {{ predictions }}</p>
     {% endif %}

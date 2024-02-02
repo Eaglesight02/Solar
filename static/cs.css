@@ -133,3 +133,9 @@ body {
     border-radius: 8px;
     margin-right: 10px;
 }
+
+.res-head
+{
+	width: 100%;
+	background-color: #999;
+}
