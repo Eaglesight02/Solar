@@ -56,7 +56,16 @@
 	</div>
     <div class="container col-4 col-md-4 mt-4 border rounded shadow p-8" style="height: 40vh;">
     <h2 class="text-center mb-4">Result</h2>
-    <!-- Your content goes here -->
+    {% if predictions is defined %}
+        <p>Predictions: {{ predictions }}</p>
+    {% endif %}
+
+    {% if predictions == 1 %}
+            <h2 style="color: green;">Solar Panel is detected</h2>
+    {% endif %}
+    {% if predictions == 0 %}
+            <h2 style="color: red;">Solar Panel is not detected</h2>
+    {% endif %}
 </div>
 <script>
     const selectImage = document.querySelector('.select-image');
