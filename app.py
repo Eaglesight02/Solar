@@ -34,7 +34,8 @@ async def upload_image( request: Request,image_file: UploadFile = File(...)):
     
     context = {
         "request": request,
-        "predictions": predictions
+        "predictions": predictions,
+        "uploaded_image": image_path    
     }
 
     return templates.TemplateResponse("index.html", context)
