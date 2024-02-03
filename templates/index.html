@@ -42,12 +42,21 @@
             <button type="submit">Upload Image</button>
         </form> -->
 
+
+        <form action="/upload_text" method="post" enctype="multipart/form-data" onsubmit="submitForm(event)">
+            <label for="userInput">Enter text:</label>
+            <input type="text" id="userInput" name="userInput">
+            
+            <button type="submit">Get User Input</button>
+        </form>
+        
         <form action="/upload_image" method="post" enctype="multipart/form-data">
             <div class="img-area" data-img="">
                 <i class='bx bxs-cloud-upload icon'></i>
                 <h3>Upload Image</h3>
                 <p>Image size must be less than <span>2MB</span></p>
             </div>
+            
             <input class="select-image" type="file" name="image_file" accept="image/*" required>
             
             <button class="custom-button mb-3" type="submit">Upload Image</button>
@@ -70,9 +79,39 @@
     {% endif %}
 </div>
 <script>
-    const selectImage = document.querySelector('.select-image');
-const imgArea = document.querySelector('.img-area');
+ function submitForm(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            // Get the value entered by the user
+            var userInputValue = document.getElementById('userInput').value;
+            
+            // Create a FormData object and append the user input
+            var formData = new FormData();
+            formData.append('userInput', userInputValue);
+            
+            // Make an asynchronous request to the backend
+            fetch('/upload_text', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the backend
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 
+
+
+
+
+
+
+const selectImage = document.querySelector('.select-image');
+const imgArea = document.querySelector('.img-area');
 
 selectImage.addEventListener('change', function () {
 	const image = this.files[0]
