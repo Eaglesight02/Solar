@@ -22,7 +22,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/upload_text")
+@app.post("/upload_text",response_class=HTMLResponse)
 async def upload_text(request: Request,userInput: str = Form(...)):
     
     def get_lat_lng(location, api_key):
@@ -75,11 +75,23 @@ async def upload_text(request: Request,userInput: str = Form(...)):
 
     static_map_image = fetch_static_map(latitude, longitude, api_key)
 
-    # Save the image to a file
-    with open("static_map_image1.jpg", "wb") as f:
-        f.write(static_map_image)
+    with open("static/static_map_image1.jpg", "wb") as f:
+           f.write(static_map_image)
     
-    def process_image(file_path):
+    predictions=process_image("static/static_map_image1.jpg")
+
+    print(predictions)
+         
+    context = {
+        "request": request,
+        "predictions": predictions 
+         
+    }
+
+    return templates.TemplateResponse("index.html", context)
+
+
+def process_image(file_path):
         with open('model.pkl', 'rb') as file:
             model = pickle.load(file)
 
@@ -92,25 +104,10 @@ async def upload_text(request: Request,userInput: str = Form(...)):
         predictions = model.predict(input_image_reshaped).reshape((-1, ))
         binary_predictions = (predictions > 0.5).astype(int)
 
-        print(binary_predictions)
-        
+       
         return binary_predictions  
 
-    predictions=process_image("static_map_image1.jpg")
-     
-    context = {
-        "request": request,
-        "predictions": predictions  
-    }
-
-    return templates.TemplateResponse("result.html", context)
-
-
     
-
-
-
-
 
 
 
