@@ -3,15 +3,23 @@
 <head>
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./static/cs.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/20c5629a29.js" crossorigin="anonymous"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white ">
         <div class="container" style="display:flex; justify-content:space-between;">
             <a class="navbar-brand" href="#">
               <h1><span><img src="./static/solar-panel.png" width="40" height="40"></span> <span style="font-family: 'Poppins', sans-serif; font-size:36px; line-height:0px;"> Solar Panel Detector </span></h1>
@@ -22,10 +30,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-link active" id="navitem1" href="#sectionwcu"><b>Home </b><span class="sr-only">(current)</span><i class="fa fa-home" style="font-size:18px"></i> </a>&nbsp;
-                    <a class="nav-link" id="navitem2" href="#ems"><b>WHO WE ARE </b><i class="fa fa-search" style="font-size:18px"></i></a>&nbsp;&nbsp;
-                    <a class="nav-link" id="navitem3" href="#dp"><b>WHAT WE DO </b><i class='fas fa-clipboard-list' style='font-size:18px'></i></a>&nbsp;&nbsp;
-                    <a class="nav-link" id="navitem4" href="#fu"><b>Follow Us </b><i class="fa fa-telegram" style="font-size:18px"></i></a>&nbsp;&nbsp;
+                    <a class="nav-link active" id="navitem1" href="#sectionwcu"><b>WHO WE ARE </b><i class="fa fa-search" style="font-size:18px"></i> </a>&nbsp;
+                    <a class="nav-link" id="navitem2" href="#ems"><b>WHAT WE DO </b><i class='fas fa-clipboard-list' style='font-size:18px'></i></a>&nbsp;&nbsp;
+                    <a class="nav-link" id="navitem3" href="#dp"><b>Follow Us </b><i class="fa fa-telegram" style="font-size:18px"></i></a>&nbsp;&nbsp;
+                    <a class="nav-link" id="navitem4" href="#fu"><b>FAQ's </b><i class="fa fa-question-circle" style="font-size:18"></i></a>&nbsp;&nbsp;
                 </div>
             </div>
 
@@ -34,7 +42,7 @@
 
     <div class="input-block"> 
    
-        <div class="containeri col-5 col-md-5">
+        <div class="containeri col-6 col-md-5 shadow p-8" style="height: 50vh; border-radius: 35px;" >
             <form action="/upload_text" method="post" enctype="multipart/form-data" >
                 <label style="font-weight: bold;" for="userInput">Address : </label>
                 <input type="text" placeholder="Give the address" id="userInput" name="userInput"> 
@@ -44,7 +52,7 @@
 
         </div>
 
-    <div class="container col-5 col-md-5">    
+    <!-- <div class="container col-5 col-md-5">    
         
         <form action="/upload_image" method="post" enctype="multipart/form-data">
             <div class="img-area" data-img="">
@@ -58,11 +66,8 @@
             <button class="custom-button mb-3" type="submit">Upload Image</button>
         </form>
         
-	</div>
-    
-   </div>
-
-    <div class="container col-4 col-md-4 mt-4  shadow p-8" style="height: 40vh; border-radius: 35px;">
+	</div> -->
+    <div class="container col-6 col-md-4 mt-4  shadow p-8" style="height: 40vh; border-radius: 35px;">
         <div class="result-heading-bg" style="color:white; background-color: #5ca1f0; border-radius: 20px; ">
             <h2 class="text-center mb-4">Result</h2>
         </div>
@@ -76,13 +81,170 @@
     {% if predictions == 0 %}
             <h2 style="color: red;">Solar Panel is not detected</h2>
     {% endif %}
-</div>
-<script>
+    </div>
+   </div>
+    
+   <div class="wrapper">
+     <h1>Frequently Asked Questions</h1>
 
-const selectImage = document.querySelector('.select-image');
+    <div class="faq">
+      <button class="accordion">
+         What is solar panel detection?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            Solar panel detection refers to the process of identifying and locating solar panels in satellite images or photographs using machine learning algorithms. This technology enables us to analyze vast amounts of imagery data to accurately detect the presence of solar panels on rooftops, fields, or other surfaces.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Why is solar panel detection important?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            Solar panel detection plays a crucial role in renewable energy monitoring, urban planning, and environmental sustainability. By accurately identifying the locations of solar panels, we can assess solar energy potential, monitor installation trends, and optimize energy infrastructure planning for maximum efficiency and impact.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        How does solar panel detection work?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            Solar panel detection involves training machine learning models, such as convolutional neural networks (CNNs), on annotated datasets of satellite images containing solar panels. These models learn to recognize patterns and features indicative of solar panels, allowing them to accurately identify and localize solar panels in new images.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        What are the benefits of solar panel detection?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            The benefits of solar panel detection include improved renewable energy planning and deployment, enhanced monitoring of solar energy production, identification of suitable locations for solar installations, and support for policy-making and decision-making processes related to sustainable energy development.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Can solar panel detection be applied to other areas?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            Yes, the technology and methodologies used for solar panel detection can be adapted and applied to various other domains, including infrastructure monitoring, agricultural analysis, disaster response, and urban development planning. The ability to analyze satellite imagery and detect specific features opens up a wide range of applications beyond renewable energy.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Is solar panel detection accurate in all types of weather conditions?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+            Solar panel detection algorithms are designed to perform well under various weather conditions, including sunny, cloudy, and overcast skies. However, extreme weather conditions such as heavy rain or snow may affect the accuracy of detection temporarily.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+        <button class="accordion">
+            Can solar panel detection identify the efficiency or type of solar panels?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            While solar panel detection primarily focuses on identifying the presence and location of solar panels, additional analysis techniques can be applied to assess factors such as panel efficiency, orientation, and type. These analyses may require additional data and modeling beyond basic detection algorithms.
+ 
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="accordion">
+            What are the limitations of solar panel detection technology?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Like any technology, solar panel detection has its limitations. Factors such as image resolution, quality, and occlusions (e.g., shadows, foliage) can impact detection accuracy. Additionally, the detection of small or poorly visible solar panels may pose challenges for automated algorithms.
+
+          </p>
+        </div>
+      </div>
+
+
+      <div class="faq">
+        <button class="accordion">
+            Can solar panel detection help with solar energy optimization?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Yes, solar panel detection can play a crucial role in optimizing solar energy usage and distribution. By accurately identifying the locations of solar panels, energy providers and grid operators can better integrate solar energy into the power grid, manage energy demand, and improve overall energy efficiency.
+
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="accordion">
+            Is solar panel detection used for regulatory compliance or enforcement purposes?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Solar panel detection technology can assist regulatory authorities in monitoring compliance with solar energy regulations, such as building codes and zoning laws. By identifying unauthorized or unpermitted solar installations, authorities can ensure adherence to regulations and promote safe and responsible deployment of solar energy infrastructure. 
+          </p>
+        </div>
+      </div>
+  </div>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        this.parentElement.classList.toggle("active");
+
+        var pannel = this.nextElementSibling;
+
+        if (pannel.style.display === "block") {
+          pannel.style.display = "none";
+        } else {
+          pannel.style.display = "block";
+        }
+      });
+    }
+
+    const selectImage = document.querySelector('.select-image');
+const inputFile = document.querySelector('#file');
 const imgArea = document.querySelector('.img-area');
 
-selectImage.addEventListener('change', function () {
+selectImage.addEventListener('click', function () {
+	inputFile.click();
+})
+
+inputFile.addEventListener('change', function () {
 	const image = this.files[0]
 	if(image.size < 2000000) {
 		const reader = new FileReader();
@@ -101,7 +263,8 @@ selectImage.addEventListener('change', function () {
 		alert("Image size more than 2MB");
 	}
 })
-    </script>
+
+  </script>
 </body>
 
 </html>
