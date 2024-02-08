@@ -10,7 +10,7 @@ import os
 import requests
 import subprocess
 import shutil
-
+import pytesseract
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -79,8 +79,9 @@ async def upload_text(request: Request,userInput: str = Form(...)):
     with open("static/static_map_image1.jpg", "wb") as f:
            f.write(static_map_image)
     
-    predictions=process_image("static/static_map_image1.jpg")
+    process_image("static/static_map_image1.jpg")
 
+    
     print(predictions)
          
     context = {
@@ -99,24 +100,24 @@ async def upload_text(request: Request,userInput: str = Form(...)):
 
 
 
-@app.post("/upload_image", response_class=HTMLResponse)
-async def upload_image( request: Request,image_file: UploadFile = File(...)):
-    image_path = f"{UPLOAD_FOLDER}/{image_file.filename}"
-    save_path = os.path.join(UPLOAD_FOLDER, image_file.filename)
+# @app.post("/upload_image", response_class=HTMLResponse)
+# async def upload_image( request: Request,image_file: UploadFile = File(...)):
+#     image_path = f"{UPLOAD_FOLDER}/{image_file.filename}"
+#     save_path = os.path.join(UPLOAD_FOLDER, image_file.filename)
     
-    with open(save_path, "wb") as image:
-        content = await image_file.read()
-        image.write(content)
+#     with open(save_path, "wb") as image:
+#         content = await image_file.read()
+#         image.write(content)
     
-    predictions = process_image(image_path)
+#     predictions = process_image(image_path)
     
-    context = {
-        "request": request,
-        "predictions": predictions,
-        "uploaded_image": image_path    
-    }
+#     context = {
+#         "request": request,
+#         "predictions": predictions,
+#         "uploaded_image": image_path    
+#     }
 
-    return templates.TemplateResponse("index.html", context)
+#     return templates.TemplateResponse("index.html", context)
 
 def process_image(file_path):
                             # with open('model.pkl', 'rb') as file:
@@ -135,8 +136,8 @@ def process_image(file_path):
                             
                             # return binary_predictions
     source_image = file_path
-    weights_path = 'yolov5/best.pt'
-    det_path='yolov5/detect.py'
+    weights_path = 'yolov/best.pt'
+    det_path='yolov/detect.py'
     run_detection(source_image, weights_path,det_path)
     
 
@@ -171,16 +172,17 @@ def run_detection(source_image, weights_path,det_path):
 
     os.rename(f"{latest_exp_folder}/static_map_image1.jpg",f"{latest_exp_folder}/output.jpg")
     
+    destination_folder = "static"
+    output_file = "output.jpg"
 
-    try:
-        shutil.move(f"{latest_exp_folder}/output.jpg", "static")
-        print(f"File '{filename}' moved successfully from '{source_folder}' to '{destination_folder}'.")
-    except FileNotFoundError:
-        print(f"File '{filename}' not found in '{source_folder}'.")
-    except PermissionError:
-        print(f"Permission denied to move file '{filename}'.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    # Check if the file already exists in the destination folder
+    destination_path = os.path.join(destination_folder, output_file)
+    if os.path.exists(destination_path):
+        os.remove(destination_path)
+        print(f"Existing file '{output_file}' removed from '{destination_folder}'.")
+
+    # Move the new file to the destination folder
+    shutil.move(f"{latest_exp_folder}/{output_file}", destination_folder)
 
 
     
