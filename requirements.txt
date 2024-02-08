@@ -8,3 +8,5 @@ flask
 python-multipart
 tensorflow
 requests
+
+

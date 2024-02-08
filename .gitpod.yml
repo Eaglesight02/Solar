@@ -6,6 +6,7 @@
 
 tasks:
   - init: pip install -r requirements.txt
+  - init: pip install -r requirements1.txt
     command: python main.py
 
 

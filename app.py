@@ -8,6 +8,7 @@ import pickle
 import numpy as np
 import os
 import requests
+import subprocess
 
 
 app = FastAPI()
@@ -62,7 +63,7 @@ async def upload_text(request: Request,userInput: str = Form(...)):
         base_url = "https://maps.googleapis.com/maps/api/staticmap"
         params = {
             "center": f"{latitude},{longitude}",
-            "zoom": 23,  # Adjust the zoom level as needed
+            "zoom": 19,  # Adjust the zoom level as needed
             "size": "400x400",
             "maptype": "satellite",
             "key": api_key
@@ -91,21 +92,6 @@ async def upload_text(request: Request,userInput: str = Form(...)):
     return templates.TemplateResponse("index.html", context)
 
 
-def process_image(file_path):
-        with open('model.pkl', 'rb') as file:
-            model = pickle.load(file)
-
-        input_image_path = file_path
-        input_image = cv2.imread(input_image_path)
-        input_image_resized = cv2.resize(input_image, (101, 101))  # Resize to match the model input size
-        input_image_rescaled = input_image_resized / 255.0  # Scale pixel values between 0 and 1
-        input_image_reshaped = np.expand_dims(input_image_rescaled, axis=0)  # Add batch dimension
-
-        predictions = model.predict(input_image_reshaped).reshape((-1, ))
-        binary_predictions = (predictions > 0.5).astype(int)
-
-       
-        return binary_predictions  
 
     
 
@@ -133,21 +119,41 @@ async def upload_image( request: Request,image_file: UploadFile = File(...)):
     return templates.TemplateResponse("index.html", context)
 
 def process_image(file_path):
-    with open('model.pkl', 'rb') as file:
-        model = pickle.load(file)
+                            # with open('model.pkl', 'rb') as file:
+                            #     model = pickle.load(file)
 
-    input_image_path = file_path
-    input_image = cv2.imread(input_image_path)
-    input_image_resized = cv2.resize(input_image, (101, 101))  # Resize to match the model input size
-    input_image_rescaled = input_image_resized / 255.0  # Scale pixel values between 0 and 1
-    input_image_reshaped = np.expand_dims(input_image_rescaled, axis=0)  # Add batch dimension
+                            # input_image_path = file_path
+                            # input_image = cv2.imread(input_image_path)
+                            # input_image_resized = cv2.resize(input_image, (101, 101))  # Resize to match the model input size
+                            # input_image_rescaled = input_image_resized / 255.0  # Scale pixel values between 0 and 1
+                            # input_image_reshaped = np.expand_dims(input_image_rescaled, axis=0)  # Add batch dimension
 
-    predictions = model.predict(input_image_reshaped).reshape((-1, ))
-    binary_predictions = (predictions > 0.5).astype(int)
+                            # predictions = model.predict(input_image_reshaped).reshape((-1, ))
+                            # binary_predictions = (predictions > 0.5).astype(int)
 
-    print(binary_predictions)
+                            # print(binary_predictions)
+                            
+                            # return binary_predictions
+    source_image = file_path
+    weights_path = 'yolov5/best.pt'
+    det_path='yolov5/detect.py'
+    run_detection(source_image, weights_path,det_path)
     
-    return binary_predictions
 
+
+def run_detection(source_image, weights_path,det_path):
+    
+    command = ["python", det_path, "--source", source_image, "--weights", weights_path]
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    
+    if process.returncode != 0:
+        print(f"Error occurred: {stderr.decode('utf-8')}")
+    else:
+        print(f"Detection successful:\n{stdout.decode('utf-8')}")
+
+
+
+    
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8000)
