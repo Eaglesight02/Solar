@@ -9,7 +9,7 @@ import numpy as np
 import os
 import requests
 import subprocess
-
+import shutil
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -63,7 +63,7 @@ async def upload_text(request: Request,userInput: str = Form(...)):
         base_url = "https://maps.googleapis.com/maps/api/staticmap"
         params = {
             "center": f"{latitude},{longitude}",
-            "zoom": 19,  # Adjust the zoom level as needed
+            "zoom": 20,  # Adjust the zoom level as needed
             "size": "400x400",
             "maptype": "satellite",
             "key": api_key
@@ -151,7 +151,36 @@ def run_detection(source_image, weights_path,det_path):
         print(f"Error occurred: {stderr.decode('utf-8')}")
     else:
         print(f"Detection successful:\n{stdout.decode('utf-8')}")
+    
+    
+    exp_folders = [folder for folder in os.listdir("yolov/runs/detect") if folder.startswith("exp") and folder[3:].isdigit()]
 
+    # If there are no exp folders, exit or handle the case accordingly
+    if not exp_folders:
+        print("No exp folders found.")
+        exit()
+
+    # Sort the exp folders by their numerical value
+    sorted_exp_folders = sorted(exp_folders, key=lambda x: int(x[3:]))
+
+    # Select the exp folder with the highest number
+    latest_exp_folder = sorted_exp_folders[-1]
+
+    # Get the full path of the latest exp folder
+    latest_exp_folder = os.path.join("yolov/runs/detect", latest_exp_folder)
+
+    os.rename(f"{latest_exp_folder}/static_map_image1.jpg",f"{latest_exp_folder}/output.jpg")
+    
+
+    try:
+        shutil.move(f"{latest_exp_folder}/output.jpg", "static")
+        print(f"File '{filename}' moved successfully from '{source_folder}' to '{destination_folder}'.")
+    except FileNotFoundError:
+        print(f"File '{filename}' not found in '{source_folder}'.")
+    except PermissionError:
+        print(f"Permission denied to move file '{filename}'.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
     
