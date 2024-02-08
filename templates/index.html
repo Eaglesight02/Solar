@@ -30,25 +30,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-link active" id="navitem1" href="#sectionwcu"><b>WHO WE ARE </b><i class="fa fa-search" style="font-size:18px"></i> </a>&nbsp;
+                    <a class="nav-link " id="navitem1" href="#sectionwcu"><b>WHO WE ARE </b><i class="fa fa-search" style="font-size:18px"></i> </a>&nbsp;
                     <a class="nav-link" id="navitem2" href="#ems"><b>WHAT WE DO </b><i class='fas fa-clipboard-list' style='font-size:18px'></i></a>&nbsp;&nbsp;
                     <a class="nav-link" id="navitem3" href="#dp"><b>Follow Us </b><i class="fa fa-telegram" style="font-size:18px"></i></a>&nbsp;&nbsp;
-                    <a class="nav-link" id="navitem4" href="#fu"><b>FAQ's </b><i class="fa fa-question-circle" style="font-size:18"></i></a>&nbsp;&nbsp;
+                    <a class="nav-link" id="navitem4" href="#faqs"><b>FAQ's </b><i class="fa fa-question-circle" style="font-size:18"></i></a>&nbsp;&nbsp;
                 </div>
             </div>
 
         </div>
     </nav>
+    
+
+
+
+
 
     <div class="input-block"> 
-   
-        <div class="containeri col-6 col-md-5 shadow p-8" style="height: 50vh; border-radius: 35px;" >
-            <form action="/upload_text" method="post" enctype="multipart/form-data" >
-                <label style="font-weight: bold;" for="userInput">Address : </label>
-                <input type="text" placeholder="Give the address" id="userInput" name="userInput"> 
-                <button class="custom-button mb-3" type="submit">Get User Input</button>
-            </form>
-            <img src="./static/static_map_image1.jpg" alt="Static Map Image" onerror="this.style.display='none';">
+                                 
+        <div class="containeri col-12 col-md-6 col-lg-5 mb-3 shadow p-8" style="height: 40vh; width:80vw; border-radius: 35px;" >
+          <form action="/upload_text" method="post" enctype="multipart/form-data">
+            <label style="font-weight: bold;" for="userInput">Address : </label><br>
+            <textarea placeholder="Give the address" id="userInput" name="userInput" rows="5" style="width: 400px;"></textarea><br>
+            <button class="custom-button mb-3" type="submit">Get User Input</button>
+        </form>
+        
+            <!-- <img src="./static/static_map_image1.jpg" alt="Static Map Image" onerror="this.style.display='none';"> -->
 
         </div>
 
@@ -67,24 +73,38 @@
         </form>
         
 	</div> -->
-    <div class="container col-6 col-md-4 mt-4  shadow p-8" style="height: 40vh; border-radius: 35px;">
+    <div class="container col-12 col-md-6 col-lg-6 mb-3  shadow p-8" style="align-items: center; justify-content: center; height: 75vh; border-radius: 35px;">
         <div class="result-heading-bg" style="color:white; background-color: #5ca1f0; border-radius: 20px; ">
             <h2 class="text-center mb-4">Result</h2>
         </div>
-    {% if predictions is defined %}
-        <p>Predictions: {{ predictions }}</p>
-    {% endif %}
+        
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-around;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+            <img src="./static/static_map_image1.jpg" style="width: 50hw; height: 40vh;">
+            <h3 style="margin-top:10px; color:white; background-color: #c2c2c2; border-radius: 10px; padding: 4px; ">Input Image</h3>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between;">
+              <img src="./static/static_map_image1.jpg" style="width: 50hw; height: 40vh;">
+              <h3 style="margin-top:10px; color:white; background-color: #c2c2c2; border-radius: 10px; padding: 4px; ">Output Image</h3>
+            </div>
+        </div>
+    
+    <div style="text-align: center;">    
+        {% if predictions is defined %}
+            <p>Predictions: {{ predictions }}</p>
+        {% endif %}
 
-    {% if predictions == 1 %}
-            <h2 style="color: green;">Solar Panel is detected</h2>
-    {% endif %}
-    {% if predictions == 0 %}
-            <h2 style="color: red;">Solar Panel is not detected</h2>
-    {% endif %}
+        {% if predictions == 1 %}
+                <h2 style="color: green;">Solar Panel is detected</h2>
+        {% endif %}
+        {% if predictions == 0 %}
+                <h2 style="color: red;">Solar Panel is not detected</h2>
+        {% endif %}
+    </div>    
     </div>
    </div>
     
-   <div class="wrapper">
+   <div id="faqs" class="wrapper">
      <h1>Frequently Asked Questions</h1>
 
     <div class="faq">

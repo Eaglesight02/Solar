@@ -33,25 +33,29 @@ body {
 	display: flex;
 	flex-direction: row;
 	min-height:80%;
-	min-width: 100%;
 	align-items: center;
-	justify-content: space-around;
-	
+	justify-content: space-evenly;
+
 }
 
 
-.containeri
+
+.containeri 
 {
-    display: flex;
+	min-height: 45vh;
+	background: #fff;
+}
+
+
+
+.containeri form
+{
+	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;	
-	background: #fff;
-	padding: 40px;
-	border-radius: 30px;
-
+	justify-content: center;
+	
 }
-
 .containeri img
 {
 	max-width: 100%; /* Ensure the image doesn't exceed its container's width */
@@ -147,7 +151,13 @@ body {
 
 #navitem4 {
     color: #323f4b;
+	transition: color 0.3s ease-in-out; 
     font-family: Roboto;
+}
+
+.nav-link
+{
+	transition: color 0.3s ease-in-out; 
 }
 
 .custom-button {
@@ -168,7 +178,7 @@ body {
 
 
 .wrapper {
-	max-width: 64%;
+	max-width: 58%;
 	margin: auto;
   }
   
@@ -186,7 +196,7 @@ body {
 	background-color: white;
 	color: rgba(0, 0, 0, 0.8);
 	cursor: pointer;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	width: 100%;
 	padding: 2rem 2.5rem;
 	border: none;
@@ -199,7 +209,7 @@ body {
   }
   
   .accordion i {
-	font-size: 1.4rem;
+	font-size: 1.2rem;
   }
   
   .active,
@@ -217,6 +227,7 @@ body {
 	color: rgba(0, 0, 0, 0.7);
 	font-size: 1.2rem;
 	line-height: 1.4;
+	text-align: justify;
   }
   
   .faq {
@@ -227,3 +238,12 @@ body {
 	border: none;
   }
 
+
+
+  
+
+  #userInput {
+    width: 300px;
+	height: 200px; /* You can adjust this value as needed */
+    font-size: 16px; /* You can adjust this value as needed */
+  }
