@@ -10,7 +10,7 @@ import os
 import requests
 import subprocess
 import shutil
-import pytesseract
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
