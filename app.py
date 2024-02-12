@@ -10,6 +10,7 @@ import os
 import requests
 import subprocess
 import shutil
+import easyocr
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -81,13 +82,24 @@ async def upload_text(request: Request,userInput: str = Form(...)):
     
     process_image("static/static_map_image1.jpg")
 
-    
-    print(predictions)
+    image_path = 'static/output.jpg'
+    img = cv2.imread(image_path)
+
+    # instance text detector
+    reader = easyocr.Reader(['en'], gpu=False)
+
+    # detect text on image
+    text_ = reader.readtext(img)
+
+    # count occurrences of 'solar_panel'
+    word_to_count = 'solar_panel'
+    predictions = sum(1 for _, text, _ in text_ if word_to_count in text.lower())
+
+
          
     context = {
         "request": request,
-        "predictions": predictions 
-         
+         "predictions" : predictions
     }
 
     return templates.TemplateResponse("index.html", context)
