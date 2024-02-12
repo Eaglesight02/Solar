@@ -91,15 +91,14 @@
     
     <div style="text-align: center;">    
         {% if predictions is defined %}
-            <!-- <p>Predictions: {{ predictions }}</p> -->
-        {% endif %}
-        
         {% if predictions >= 1 %}
                 <h2 style="color: green;">Number of Solar Panels detected are ({{ predictions }})</h2>
         {% endif %}
         {% if predictions == 0 %}
                 <h2 style="color: red;">No Solar Panel is detected</h2>
         {% endif %}
+        {% endif %}
+      
     </div>    
     </div>
    </div>

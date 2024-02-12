@@ -43,6 +43,9 @@ body {
 .containeri 
 {
 	min-height: 45vh;
+	margin-left: 10px;
+	padding-left: -4px;
+	padding-right: -4px;
 	background: #fff;
 }
 
