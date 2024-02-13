@@ -64,7 +64,7 @@ async def upload_text(request: Request,userInput: str = Form(...)):
         base_url = "https://maps.googleapis.com/maps/api/staticmap"
         params = {
             "center": f"{latitude},{longitude}",
-            "zoom": 20,  # Adjust the zoom level as needed
+            "zoom": 21,  # Adjust the zoom level as needed
             "size": "400x400",
             "maptype": "satellite",
             "key": api_key
@@ -102,7 +102,7 @@ async def upload_text(request: Request,userInput: str = Form(...)):
          "predictions" : predictions
     }
 
-    return templates.TemplateResponse("index.html", context)
+    return templates.TemplateResponse("result.html", context)
 
 
 

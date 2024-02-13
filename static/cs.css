@@ -158,11 +158,9 @@ body {
     font-family: Roboto;
 }
 
-.nav-link
-{
-	transition: color 0.3s ease-in-out; 
+.nav-link {
+    transition: color 0.3s, transform 0.3s;
 }
-
 .custom-button {
     color: white;
     background-color: #5ca1f0;
@@ -249,4 +247,16 @@ body {
     width: 300px;
 	height: 200px; /* You can adjust this value as needed */
     font-size: 16px; /* You can adjust this value as needed */
+  }
+
+  
+.content{
+	border: 3px solid black;
+	margin-left: 15%;
+	width: 70%;
+	align-items: center;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+	justify-content: center;
+	border-radius: 25px;
+	padding: 10px;
   }
